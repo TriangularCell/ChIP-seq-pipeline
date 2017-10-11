@@ -315,3 +315,32 @@ findMotifsGenome.pl $file mm10 $outF$name"_motifs" -size given -p 2
 
 # findMotifsGenome.pl <peak/BED file> <genome> <output directory> -size # [options]
 
+################################## MAnorm differential ChIP-seq ################################
+bash ./MAnorm.sh  $sample1_peaks $sample2_peaks $sample1_read $sample2_read $sample1_readshift_lentgh $sample2_readshift_length
+
+# MAnorm
+# http://bcb.dfci.harvard.edu/~gcyuan/MAnorm/R_tutorial.html
+# https://github.com/ying-w/chipseq-compare/tree/master/MAnorm
+
+# ./MAnorm.sh  sample1_peaks.bed  sample2_peaks.bed  sample1_read.bed  sample2_read.bed sample1_readshift_lentgh[INT] sample2_readshift_length[INT]
+# The first 2 files have ONLY 3 columns: chromosome, start, end.
+# The next 2 files should have 4 columns: chromosome, start, end, strand (+/-)
+
+
+################################## Visualization ################################
+1. IGV
+2. UCSC genome Browser
+3. Gviz
+
+#2. Example custom tracks:
+track type=bigWig visibility=full name="NPC2-K" description="NPC2-K_normed_coverage" bigDataUrl=ftp://ftpqj:hku_wanglabqj@147.8.193.64/NPC2/NPC2-K_trim_noDuplicate_sort_name_fixed_0x2_sameChr_sort_fs500_norm_CP100M_sort.bw itemRgb=On color=34,139,34
+
+track type=bigWig visibility=full name="NPC2-I" description="NPC2-I_normed_coverage" bigDataUrl=ftp://ftpqj:hku_wanglabqj@147.8.193.64/NPC2/NPC2-I_noDuplicate_sort_name_fixed_0x2_sameChr_sort_fs500_norm_CP100M_sort.bw itemRgb=On color=34,139,34
+
+track type=bigBed visibility=dense name="NPC2_peaks" description="NPC2_distal_peaks" bigDataUrl=ftp://ftpqj:hku_wanglabqj@147.8.193.64/NPC2/NPC2-NPC2_Homer_UniqTag_peaks_500bp_distal_CoSort.bb itemRgb=On color=34,139,34
+
+#3. References for Gviz
+# https://bioconductor.org/packages/release/bioc/html/Gviz.html
+# https://link-springer-com.eproxy2.lib.hku.hk/content/pdf/10.1007%2F978-1-4939-3578-9_16.pdf
+# https://www.bioconductor.org/help/course-materials/2015/CSAMA2015/lab/Epigenetics_and_Chip_seqLab.pdf
+
